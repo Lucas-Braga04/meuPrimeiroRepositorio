@@ -15,17 +15,20 @@
 
 function buscarPessoas() {
     let quantPessoas = 0;
-    quantPessoas = document.getElementById("valor").value;
+    quantPessoas = document.getElementById("numero").value;
 
-    fetch(`https://swapi.dev/api/people/${quantPessoas}`).then(resposta => resposta.json())
+    fetch(`https://swapi.dev/api/people/${quantPessoas}`)
+        .then(resposta => resposta.json())
         .then(data => {
-            const nomeInput = document.getElementById("nomepessoa");
-            const blocoInfo = document.getElementById("infopessoa");
+            const nomeInput = document.getElementById("nomePessoa");
+            const blocoInfo = document.getElementById("infoPessoa");
 
-            nomeInput.innerHTML = data.name;
+            nomeInput.value = data.name;
             blocoInfo.innerHTML = data.name + ", " + data.gender + ", " + data.films;
 
-        }).catch(erro => {
-            alert('API não está requerindo os dados', erro)
+        })
+
+        .catch(erro => {
+            alert('API não está passando os dados', erro)
         });
 }
