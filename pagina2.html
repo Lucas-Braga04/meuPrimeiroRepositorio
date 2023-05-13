@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pessoas</title>
+</head>
+
+<body>
+    <h1>Pesquisar filmes dos atores da saga Star Wars!</h1>
+    <form>
+        <input type="number" id="numero">
+        <input type="text" id="nomepessoa">
+        <textarea name="pessoa" id="infopessoa" cols="30" rows="10"></textarea>
+        <button onclick="buscarPessoas()">Inserir Dado</button>
+    </form>
+    <script>
+        function buscarPessoas() {
+
+            const quantPessoas = document.getElementById('numero');
+            fetch(`https://swapi.dev/api/people/ ${quantPessoas}`).then(resposta => resposta.json())
+                .then(data => {
+                    const nomeInput = document.getElementById('nomepessoa');
+                    const blocoInfo = document.getElementById('infopessoa');
+
+                    nomeInput.innerHTML = data.name;
+                    blocoInfo.innerHTML = data.name + ", " + data.gender + ", " + data.films;
+
+                }).catch(erro => {
+                    alert('API não está requerindo os dados', erro)
+                });
+        }
+    </script><!DOCTYPE html>
+</body>
+
+</html>
